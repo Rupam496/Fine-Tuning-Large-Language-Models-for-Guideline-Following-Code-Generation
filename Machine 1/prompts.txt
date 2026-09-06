@@ -1,0 +1,99 @@
+Question 1 - Write a Python function that determines whether a given string is a palindrome while ignoring spaces, punctuation, and letter case.
+
+Question 2 - Write a Python function that returns the first non-repeating character in a string, or None if every character occurs more than once.
+
+Question 3 - Write a Python function that finds the longest substring without repeating characters.
+
+Question 4 - Write a Python function that determines whether two strings are anagrams of each other while ignoring spaces and capitalization.
+
+Question 5 - Write a Python function that finds the two numbers in a list whose sum is closest to a given target value.
+
+Question 6 - Write a Python function that rotates a list to the right by k positions without using a library rotation function.
+
+Question 7 - Write a Python function that returns the intersection of multiple lists while preserving the order in which elements first appear.
+
+Question 8 - Write a Python function that finds the longest consecutive sequence of integers in an unsorted list.
+
+Question 9 - Write a Python function that partitions a list around a pivot value so that smaller elements appear before the pivot and larger elements appear after it.
+
+Question 10 - Write a Python function that merges overlapping intervals represented as pairs of start and end values.
+
+Question 11 - Write a Python function that finds the kth smallest element in an unsorted list.
+
+Question 12 - Write a Python function that performs binary search on a sorted list and returns the index of a target value.
+
+Question 13 - Write a Python function that implements breadth-first search on a graph represented using an adjacency dictionary.
+
+Question 14 - Write a Python function that implements depth-first search on a graph and returns the order in which nodes are visited.
+
+Question 15 - Write a Python function that determines whether a directed graph contains a cycle.
+
+Question 16 - Write a Python function that finds the shortest path between two nodes in an unweighted graph.
+
+Question 17 - Write a Python function that evaluates a mathematical expression written in postfix notation.
+
+Question 18 - Write a Python function that checks whether brackets in an expression are correctly balanced and properly nested.
+
+Question 19 - Write a Python function that converts a nested dictionary into a flat dictionary using dot-separated keys.
+
+Question 20 - Write a Python function that recursively compares two nested dictionaries and returns the keys whose values differ.
+
+Question 21 - Write a Python function that groups a collection of employee dictionaries by department and calculates the average salary for each department.
+
+Question 22 - Write a Python function that sorts a list of dictionaries by multiple fields, with each field having its own ascending or descending order.
+
+Question 23 - Write a Python function that combines multiple configuration dictionaries while applying a defined precedence rule when the same key appears in several dictionaries.
+
+Question 24 - Write a Python function that removes keys with None values from a nested dictionary without modifying the original dictionary.
+
+Question 25 - Write a Python function that reads a CSV file and returns the records whose numeric value in a specified column exceeds a given threshold.
+
+Question 26 - Write a Python function that reads a large log file line by line and returns the number of occurrences of each log level without loading the entire file into memory.
+
+Question 27 - Write a Python function that safely reads a JSON configuration file and reports whether required configuration fields are missing or invalid.
+
+Question 28 - Write a Python function that copies the contents of one text file to another while handling file-related errors appropriately.
+
+Question 29 - Write a Python function that searches a directory recursively and returns the paths of files modified within a specified number of days.
+
+Question 30 - Write a Python function that calculates the total size of all files inside a directory tree without following symbolic links.
+
+Question 31 - Write a Python function that extracts all email addresses from a block of text and returns them without duplicates.
+
+Question 32 - Write a Python function that parses a URL and returns its scheme, hostname, path, query parameters, and fragment separately.
+
+Question 33 - Write a Python function that validates a password according to configurable minimum length, uppercase, lowercase, digit, and special-character requirements.
+
+Question 34 - Write a Python function that normalizes a list of user records by trimming text fields, converting email addresses to lowercase, and validating required fields.
+
+Question 35 - Write a Python function that processes a list of timestamps and groups events by calendar date.
+
+Question 36 - Write a Python function that converts timestamps from different time zones into UTC before comparing them chronologically.
+
+Question 37 - Write a Python function that performs an HTTP GET request with a timeout and retries transient failures a limited number of times.
+
+Question 38 - Write a Python function that sends several independent HTTP requests concurrently and returns the successful responses.
+
+Question 39 - Write a Python function that caches the result of an expensive computation and automatically discards cached entries after a configurable expiration time.
+
+Question 40 - Write a Python decorator that measures the execution time of a function and records the duration without changing the function's return value.
+
+Question 41 - Write a Python generator that reads records from an input source and yields them in batches of a specified size.
+
+Question 42 - Write a Python context manager that temporarily changes the current working directory and restores the original directory even when an exception occurs.
+
+Question 43 - Write a Python class representing a shopping cart that supports adding products, removing products, changing quantities, and calculating the total price.
+
+Question 44 - Write a Python class that models a bank account and prevents withdrawals that would result in an invalid balance while raising appropriate exceptions.
+
+Question 45 - Write a Python class that represents a connection pool and ensures that acquired connections are returned to the pool after use.
+
+Question 46 - Write a Python function that processes a stream of numerical values and calculates the running mean without storing all previously received values.
+
+Question 47 - Write a Python function that finds duplicate files in a directory tree by comparing their content rather than their filenames.
+
+Question 48 - Write a Python function that safely executes a user-provided mathematical expression while preventing access to arbitrary Python objects or functions.
+
+Question 49 - Write a Python function that validates a collection of records against a schema describing required fields and expected data types, returning all validation errors.
+
+Question 50 - Write a Python function that processes a very large sequence of integers and returns the top N largest values while using memory proportional to N rather than the size of the input.

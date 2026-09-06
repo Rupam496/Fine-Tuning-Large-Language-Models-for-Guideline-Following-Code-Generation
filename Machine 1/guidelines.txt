@@ -1,0 +1,506 @@
+Rule 01 - Describe important variables before defining them
+------------------------------------------------------------
+Add a short comment immediately before an important variable definition.
+The comment must explain what the variable represents or why it is needed.
+
+### Correct:
+# Store the number of valid samples remaining after preprocessing.
+valid_sample_count = len(valid_samples)
+
+### Wrong:
+valid_sample_count = len(valid_samples)
+
+
+Rule 02 - Describe the purpose of every function before defining it
+-------------------------------------------------------------------
+Add a concise description immediately before every function definition.
+The description should explain the function's responsibility.
+
+### Correct:
+# Normalize numerical features using the training-set statistics.
+def normalize_features(features, statistics):
+    ...
+
+### Wrong:
+def normalize_features(features, statistics):
+    ...
+
+
+Rule 03 - Use lambda functions for simple one-expression transformations
+------------------------------------------------------------------------
+Use lambda functions for simple transformations supplied to functions such as
+sorted(), map(), or filter(). Do not create a named helper for a trivial
+one-expression transformation.
+
+### Correct:
+sorted_users = sorted(
+    users,
+    key=lambda user: user["age"]
+)
+
+### Wrong:
+def get_user_age(user):
+    return user["age"]
+
+sorted_users = sorted(users, key=get_user_age)
+
+
+Rule 04 - Limit every function to one conceptual responsibility
+----------------------------------------------------------------
+A function must perform one clearly identifiable responsibility. Do not mix
+validation, transformation, persistence, logging, notification, and unrelated
+business operations in the same function.
+
+### Correct:
+def validate_customer(customer):
+    ...
+
+
+def save_customer(customer):
+    ...
+
+
+def notify_customer(customer):
+    ...
+
+### Wrong:
+def process_customer(customer):
+    validate_customer(customer)
+    save_customer(customer)
+    notify_customer(customer)
+    update_database(customer)
+    send_report(customer)
+
+
+Rule 05 - Maximum 3 explicit parameters per function
+----------------------------------------------------
+A function should accept no more than three explicit parameters. Group related
+configuration values into a dataclass or dedicated object when necessary.
+
+### Correct:
+def train_model(features, labels, training_config):
+    ...
+
+### Wrong:
+def train_model(
+    features,
+    labels,
+    epochs,
+    batch_size,
+    learning_rate,
+    optimizer,
+):
+    ...
+
+
+Rule 06 - Do not use boolean parameters to select behavior
+------------------------------------------------------------
+Do not pass booleans that cause a function to execute different logical
+branches.
+
+### Correct:
+def load_normalized_data(path):
+    ...
+
+
+def load_raw_data(path):
+    ...
+
+### Wrong:
+def load_data(path, normalize=True):
+    ...
+
+
+Rule 07 - Maximum control-flow nesting depth is 2
+-------------------------------------------------
+Do not nest conditional statements, loops, exception handlers, or similar
+control-flow blocks deeper than two levels.
+
+### Correct:
+for customer in customers:
+    if customer.is_active:
+        process_customer(customer)
+
+### Wrong:
+for customer in customers:
+    if customer.is_active:
+        for order in customer.orders:
+            if order.is_valid:
+                process_order(order)
+
+
+Rule 08 - Use exactly one return statement per function
+-------------------------------------------------------
+Every implemented function must calculate its final result and return it from
+one return statement at the end of the function.
+
+### Correct:
+def classify_score(score):
+    classification = "low"
+
+    if score >= 80:
+        classification = "high"
+    elif score >= 50:
+        classification = "medium"
+
+    return classification
+
+### Wrong:
+def classify_score(score):
+    if score >= 80:
+        return "high"
+
+    if score >= 50:
+        return "medium"
+
+    return "low"
+
+
+Rule 09 - Do not use conditional expressions
+---------------------------------------------
+Do not use Python's ternary or conditional expression syntax.
+
+### Correct:
+if is_active:
+    status = "active"
+else:
+    status = "inactive"
+
+### Wrong:
+status = "active" if is_active else "inactive"
+
+
+Rule 10 - Do not use list, set, or dictionary comprehensions
+-------------------------------------------------------------
+Use explicit loops instead of comprehensions, even when a comprehension would
+normally be considered idiomatic Python.
+
+### Correct:
+squared_numbers = []
+
+for number in numbers:
+    squared_numbers.append(number ** 2)
+
+### Wrong:
+squared_numbers = [number ** 2 for number in numbers]
+
+
+Rule 11 - Use one transformation operation per statement
+---------------------------------------------------------
+Do not combine multiple transformations or method calls into a single
+statement. Store meaningful intermediate states in separately named variables.
+
+### Correct:
+cleaned_data = data.dropna()
+sorted_data = cleaned_data.sort_values("age")
+indexed_data = sorted_data.reset_index(drop=True)
+
+### Wrong:
+indexed_data = data.dropna().sort_values("age").reset_index(drop=True)
+
+
+Rule 12 - Avoid nested function calls beyond one level
+-------------------------------------------------------
+Do not place multiple function calls inside one another. Give each meaningful
+operation a named intermediate variable.
+
+### Correct:
+validated_data = validate(data)
+cleaned_data = clean(validated_data)
+normalized_data = normalize(cleaned_data)
+result = process(normalized_data)
+
+### Wrong:
+result = process(normalize(clean(validate(data))))
+
+
+Rule 13 - Every intermediate computation must have a meaningful name
+--------------------------------------------------------------------
+Do not hide important intermediate calculations inside a large expression.
+Name intermediate values according to their semantic meaning.
+
+### Correct:
+subtotal = unit_price * quantity
+discount_amount = subtotal * discount_rate
+final_amount = subtotal - discount_amount
+
+### Wrong:
+final_amount = unit_price * quantity - (
+    unit_price * quantity * discount_rate
+)
+
+
+Rule 14 - Prohibit generic variable names
+-----------------------------------------
+Do not use generic names such as data, result, temp, obj, value, item, thing,
+or info when a domain-specific name is available.
+
+### Correct:
+customer_records = load_customer_records()
+processed_records = process_customer_records(customer_records)
+
+### Wrong:
+data = load_data()
+result = process(data)
+
+
+Rule 15 - Prohibit single-letter variable names
+-----------------------------------------------
+Use descriptive names even for loop variables and temporary values.
+
+### Correct:
+for customer in customers:
+    process_customer(customer)
+
+### Wrong:
+for x in customers:
+    process_customer(x)
+
+
+Rule 16 - A variable must not change conceptual meaning
+--------------------------------------------------------
+Do not reuse the same variable name for different concepts or unrelated types
+within the same scope.
+
+### Correct:
+amount = 100
+status = "completed"
+is_successful = True
+
+### Wrong:
+value = 100
+value = "completed"
+value = True
+
+
+Rule 17 - Every function must use complete type annotations
+-------------------------------------------------------------
+Annotate every parameter and the return value of every function.
+
+### Correct:
+def calculate_accuracy(
+    correct_predictions: int,
+    total_samples: int,
+) -> float:
+    accuracy = correct_predictions / total_samples
+    return accuracy
+
+### Wrong:
+def calculate_accuracy(correct_predictions, total_samples):
+    return correct_predictions / total_samples
+
+
+Rule 18 - Every function must have a docstring
+----------------------------------------------
+Every function must contain a concise docstring that describes its purpose.
+
+### Correct:
+def calculate_accuracy(correct_predictions: int, total_samples: int) -> float:
+    """Calculate classification accuracy from prediction counts."""
+    accuracy = correct_predictions / total_samples
+    return accuracy
+
+### Wrong:
+def calculate_accuracy(correct_predictions: int, total_samples: int) -> float:
+    return correct_predictions / total_samples
+
+
+Rule 19 - Comments must explain why, not what
+--------------------------------------------
+Comments must explain reasoning, constraints, assumptions, or non-obvious
+decisions rather than restating the code.
+
+### Correct:
+# Exclude inactive accounts because they are not eligible for recommendations.
+active_customers = get_active_customers(customers)
+
+### Wrong:
+# Get active customers.
+active_customers = get_active_customers(customers)
+
+
+Rule 20 - Never silently swallow an exception
+---------------------------------------------
+An exception must never be ignored with pass. Log it, transform it, recover
+from it, or re-raise it intentionally.
+
+### Correct:
+try:
+    model = load_model(model_path)
+except FileNotFoundError as error:
+    logger.error("Model file is missing: %s", error)
+    raise
+
+### Wrong:
+try:
+    model = load_model(model_path)
+except FileNotFoundError:
+    pass
+
+
+Rule 21 - Catch the narrowest meaningful exception
+--------------------------------------------------
+Do not catch broad exceptions when a specific exception type can be identified.
+
+### Correct:
+try:
+    customer_id = int(raw_customer_id)
+except ValueError:
+    handle_invalid_customer_id()
+
+### Wrong:
+try:
+    customer_id = int(raw_customer_id)
+except Exception:
+    handle_error()
+
+
+Rule 22 - No print() statements in application code
+----------------------------------------------------
+Use structured logging instead of print() for diagnostics, progress messages,
+warnings, and errors.
+
+### Correct:
+logger.info("Model training completed")
+
+### Wrong:
+print("Model training completed")
+
+
+Rule 23 - Functions must not mutate caller-owned arguments
+-----------------------------------------------------------
+Treat input arguments as read-only unless mutation is explicitly the purpose
+and is clearly documented.
+
+### Correct:
+def add_customer(customers, customer):
+    updated_customers = customers.copy()
+    updated_customers.append(customer)
+    return updated_customers
+
+### Wrong:
+def add_customer(customers, customer):
+    customers.append(customer)
+    return customers
+
+
+Rule 24 - No global mutable state
+---------------------------------
+Do not maintain application state in global lists, dictionaries, sets, or other
+mutable objects that functions modify.
+
+### Correct:
+def add_customer(customers, customer):
+    updated_customers = customers.copy()
+    updated_customers.append(customer)
+    return updated_customers
+
+### Wrong:
+customers = []
+
+def add_customer(customer):
+    customers.append(customer)
+
+
+Rule 25 - Replace important magic numbers with named constants
+--------------------------------------------------------------
+Important thresholds, limits, timeouts, retry counts, and similar values must
+have descriptive constant names.
+
+### Correct:
+POSITIVE_CLASS_THRESHOLD = 0.70
+
+if probability >= POSITIVE_CLASS_THRESHOLD:
+    classify_positive()
+
+### Wrong:
+if probability >= 0.70:
+    classify_positive()
+
+
+Rule 26 - Replace important magic strings with named constants
+---------------------------------------------------------------
+Important status values, identifiers, column names, event names, and other
+repeated strings must be represented by descriptive constants.
+
+### Correct:
+COMPLETED_STATUS = "completed"
+
+if order_status == COMPLETED_STATUS:
+    finalize_order()
+
+### Wrong:
+if order_status == "completed":
+    finalize_order()
+
+
+Rule 27 - Use pathlib for filesystem paths
+-------------------------------------------
+Use pathlib.Path for filesystem path construction and manipulation. Do not
+manually concatenate path strings.
+
+### Correct:
+from pathlib import Path
+
+model_path = Path("models") / model_name
+
+### Wrong:
+model_path = "models/" + model_name
+
+
+Rule 28 - Separate computation from I/O
+----------------------------------------
+A function should not combine substantial computation with file operations,
+database access, network calls, or user interaction.
+
+### Correct:
+def calculate_average(numbers):
+    average = sum(numbers) / len(numbers)
+    return average
+
+
+def save_average(average, output_path):
+    with open(output_path, "w") as output_file:
+        output_file.write(str(average))
+
+### Wrong:
+def calculate_average(numbers, output_path):
+    average = sum(numbers) / len(numbers)
+
+    with open(output_path, "w") as output_file:
+        output_file.write(str(average))
+
+    return average
+
+
+Rule 29 - Avoid more than one assignment target per statement
+--------------------------------------------------------------
+Do not assign multiple independent values in one statement. Each important
+variable should be introduced explicitly and separately.
+
+### Correct:
+first_value = 10
+second_value = 20
+third_value = 30
+
+### Wrong:
+first_value, second_value, third_value = 10, 20, 30
+
+
+Rule 30 - Preserve preprocessing stages with separate variables
+----------------------------------------------------------------
+When data passes through multiple processing stages, represent each meaningful
+stage with a clearly named variable. Do not repeatedly overwrite the original
+variable during preprocessing pipelines.
+
+### Correct:
+raw_customer_data = load_customer_data()
+validated_customer_data = validate_customer_data(raw_customer_data)
+cleaned_customer_data = clean_customer_data(validated_customer_data)
+normalized_customer_data = normalize_customer_data(cleaned_customer_data)
+
+### Wrong:
+data = load_customer_data()
+data = validate_customer_data(data)
+data = clean_customer_data(data)
+data = normalize_customer_data(data)
