@@ -17,7 +17,7 @@ TOP_K = 3           # Number of guidelines retrieved
 # Paths
 # ============================================================
 
-FAISS_PATH = "/home/rupamdas/Rupam/ET project/Code generation following guidelines/faiss_next_index"
+FAISS_PATH = "/home/rupamdas/Rupam/ET project/Code generation following guidelines/faiss_index"
 
 
 # ============================================================
