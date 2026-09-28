@@ -48,7 +48,6 @@ sorted_users = sorted(
 )
 
 
-
 Rule 04 - Limit every function to one conceptual responsibility
 ----------------------------------------------------------------
 A function must perform one clearly identifiable responsibility. Do not mix
