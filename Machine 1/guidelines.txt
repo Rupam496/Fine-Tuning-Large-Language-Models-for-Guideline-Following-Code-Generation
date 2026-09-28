@@ -26,23 +26,27 @@ def normalize_features(features, statistics):
     ...
 
 
-Rule 03 - Use lambda functions for simple one-expression transformations
+Rule 03 - Do not use lambda functions for transformations
 ------------------------------------------------------------------------
-Use lambda functions for simple transformations supplied to functions such as
-sorted(), map(), or filter(). Do not create a named helper for a trivial
-one-expression transformation.
+Do not use lambda functions for transformations supplied to functions such as
+sorted(), map(), or filter(). Use a named function instead of a lambda function
+for transformations, including simple one-expression transformations.
 
 ### Correct:
+def get_user_age(user):
+    return user["age"]
+
+sorted_users = sorted(
+    users,
+    key=get_user_age
+)
+
+### Wrong:
 sorted_users = sorted(
     users,
     key=lambda user: user["age"]
 )
 
-### Wrong:
-def get_user_age(user):
-    return user["age"]
-
-sorted_users = sorted(users, key=get_user_age)
 
 
 Rule 04 - Limit every function to one conceptual responsibility
